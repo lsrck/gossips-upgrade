@@ -37,8 +37,12 @@ class ChitchatsController < ApplicationController
 
 	def destroy
 		@chitchat = Chitchat.find(params[:id])
-		@chitchat.destroy
+		if @chitchat.user == current_user
+			@chitchat.destroy
+			redirect_to chitchats_path
+		else flash[:error] = "Vous n'avez pas rédigé ce gossip"
 		redirect_to chitchats_path
+	end
 	end
 		
 	private
