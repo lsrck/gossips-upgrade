@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+	<h1> Lancer un nouveau gossip</h1>
+	<p> Bienvenue <%= current_user.anonymous_username  %></p>
+	<%= form_tag (chitchats_path) do %>
+		<%= label_tag 'content', 'La rumeur à balancer' %>
+		<%= text_area_tag 'content' %>
+		<br><br>
+		<%= submit_tag "Lancer !"%>
+	<% end %>
+	<%else%>
+	<p>Hey bro connecte-toi ou inscris-toi !</p>
+<% end %>

@@ -1,0 +1,9 @@
+<h1>Editer ton gossip</h1>
+
+
+<%= form_tag chitchat_path(@chitchat), method: :put do %>
+  <%= render 'form' %>
+	<%= submit_tag "Modifier ton gossip !"%> 
+<% end %>
+
+<%= link_to 'Clique pour détruire', @chitchat, method: :delete %>

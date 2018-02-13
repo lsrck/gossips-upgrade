@@ -1,0 +1,39 @@
+<% if user_signed_in? %>
+
+<h1>Listing des gossips</h1>
+ 
+<table>
+  <tr>
+    <th>Author</th>
+    <th>Content</th>
+    <th>Date de création</th>
+  </tr>
+ 
+  <% @chitchat.each do |chitchat| %>
+    <tr>
+      <td><%= current_user.anonymous_username %></td>
+      <td><%= chitchat.content %></td>
+       <td><%= chitchat.created_at.strftime("%d-%m-%Y") %></td>
+      <td><%= link_to "Aller sur le gossip", chitchat_path(chitchat) %></td>
+      <td><%= link_to "Editer le gossip",
+      edit_chitchat_path(chitchat) %></td> 
+       <td><%= link_to 'Destroy', chitchat_path(chitchat),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to 'Créer un nouveau gossip',  new_chitchat_path %></p>
+<p><strong>Profil: <%= current_user.anonymous_username%></strong></p>
+  
+  <p> <%= link_to "Sign Out", destroy_user_session_path, method: :delete %> </p>
+  <p> <%= link_to "Edit Account", edit_user_registration_path %> </p>
+
+  <% else %>
+  <h1>Tu dois être connecté pour acceder aux gossips !</h1>
+  <p>Click sur le lien suivant pour te connecter</p>
+  <p> <%= link_to "Sign in", new_user_session_path %> </p>
+  <p>Click sur le lien suivant pour t'inscrire</p>
+  <p> <%= link_to "Sign Up", new_user_registration_path %> </p>
+<% end %>
